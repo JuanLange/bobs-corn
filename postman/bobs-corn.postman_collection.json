@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "b5b5b5b5-b5b5-b5b5-b5b5-b5b5b5b5b5b5",
+		"name": "Bob's Corn API",
+		"description": "Colección para probar la API de Bob's Corn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Comprar Maíz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/corn/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"corn",
+						"buy"
+					]
+				},
+				"description": "Comprar un maíz. Limitado a 1 por minuto por IP."
+			},
+			"response": [
+				{
+					"name": "Compra Exitosa",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/corn/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"corn",
+								"buy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"¡Has comprado un maíz! 🌽\",\n    \"purchase\": {\n        \"id\": 1,\n        \"client_ip\": \"::1\",\n        \"purchase_time\": \"2024-12-19T21:32:50.000Z\",\n        \"success\": true\n    },\n    \"nextAvailable\": \"2024-12-19T21:33:50.000Z\"\n}"
+				},
+				{
+					"name": "Rate Limit Excedido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/corn/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"corn",
+								"buy"
+							]
+						}
+					},
+					"status": "Too Many Requests",
+					"code": 429,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"¡Espera un minuto antes de comprar más maíz! 🌽\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener Historial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/corn/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"corn",
+						"history"
+					]
+				},
+				"description": "Obtener el historial de compras de maíz"
+			},
+			"response": [
+				{
+					"name": "Historial Exitoso",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/corn/history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"corn",
+								"history"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"history\": [\n        {\n            \"client_ip\": \"::1\",\n            \"total_purchases\": 3,\n            \"last_purchase\": \"2024-12-19T21:32:50.000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				},
+				"description": "Verificar el estado de la API"
+			},
+			"response": [
+				{
+					"name": "Health Check Exitoso",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"status\": \"OK\",\n    \"message\": \"Bob's Corn API is running! 🌽\"\n}"
+				}
+			]
+		}
+	]
+}

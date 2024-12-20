@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS bobs_corn;
+CREATE DATABASE bobs_corn;

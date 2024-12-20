@@ -1,4 +1,4 @@
-# Bob's Corn 🌽
+# Bob's Corn Farm 🌽
 
 Una aplicación fullstack para prueba tecnica.
 
@@ -78,6 +78,49 @@ cd ..
 npm run dev
 ```
 
+## Configuración de Variables de Entorno
+
+El proyecto utiliza variables de entorno para la configuración. Se proporcionan archivos `.env.example` tanto en el frontend como en el backend como plantillas.
+
+### Configuración Inicial
+1. Copia los archivos de ejemplo:
+```bash
+# Frontend
+cp .env.example .env
+
+# Backend
+cd server
+cp .env.example .env
+```
+
+2. Modifica los valores según tu entorno.
+
+### Variables Frontend (.env)
+```plaintext
+# URL del backend API
+VITE_API_URL=http://localhost:3000  # URL donde se ejecuta el servidor
+```
+
+### Variables Backend (server/.env)
+```plaintext
+# Configuración del Servidor
+PORT=3000                    # Puerto donde se ejecutará el servidor
+
+# Base de Datos PostgreSQL
+DATABASE_URL="postgresql://usuario:password@localhost:5432/bobscorn"
+# Formato: postgresql://USUARIO:PASSWORD@HOST:PUERTO/NOMBRE_DB
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=60000   # Ventana de tiempo en milisegundos (1 minuto)
+RATE_LIMIT_MAX_REQUESTS=1    # Máximo de compras permitidas por ventana
+```
+
+### Validación
+El proyecto incluye validación de variables de entorno:
+- Variables requeridas son verificadas al inicio
+- Se proporcionan mensajes de error descriptivos si falta alguna variable
+- Los tipos de datos son validados (números, URLs, etc.)
+
 ## Desarrollo
 
 La aplicación estará disponible en:
@@ -105,6 +148,36 @@ baselabs/
 - `POST /api/corn/buy`: Comprar maíz (rate limited)
 - `GET /api/corn/history`: Obtener historial de compras
 
-## Licencia
+## Testing
 
-Este proyecto es distribuido bajo la licencia [MIT](https://choosealicense.com/licenses/mit/).
+La aplicación incluye tests automatizados usando Jest y React Testing Library. Los tests se enfocan en las funcionalidades críticas del negocio:
+
+### Tests Implementados
+
+1. **Compra de Maíz**
+   - Verificación de compra exitosa
+   - Manejo del rate limiting (1 compra por minuto)
+   - Validación de mensajes de éxito/error
+
+2. **Historial de Compras**
+   - Visualización correcta de datos históricos
+   - Formato de fechas y cantidades
+   - Integración con el panel de estadísticas
+
+### Ejecutar Tests
+
+Para ejecutar los tests:
+
+```bash
+npm test
+```
+
+Para ejecutar los tests en modo watch:
+
+```bash
+npm test -- --watch
+```
+
+
+## Nota
+Este proyecto fue creado como prueba técnica para BaseLabs. El código es únicamente para fines de evaluación y demostración de habilidades técnicas.
